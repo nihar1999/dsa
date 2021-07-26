@@ -1,0 +1,22 @@
+int bfs1 (int s)
+{
+	vector<int>v(n+1,0),level(n+1,0),vis(n+1,0);
+	queue<int>q;
+	q.push(s);
+	v[s] = 1;
+	while(!q.empty())
+	{
+		int p = q.front();
+		q.pop();
+		for(int i=0;i<adj1[p].size();i++)
+		{
+			if(vis[adj1[p][i]]==0)
+			{
+				vis[adj1[p][i]] = 1;
+				level[adj1[p][i]] = level[p]+1;
+				q.push(adj1[p][i]);
+			}
+		}
+	}
+	return level[n];
+}

@@ -1,0 +1,130 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define mod 1000000007
+#define pb push_back
+#define mp make_pair
+#define endl '\n'
+#define N 100005
+#define pf first
+#define ps second
+using namespace std;
+int a[N],ans[N],res,cnt[N];
+void add(int pos)
+{
+    cnt[a[pos]]++;
+    if(cnt[a[pos]]==1)
+        res++;
+}
+void remove(int pos)
+{
+    cnt[a[pos]]--;
+    if(cnt[a[pos]]==0)
+        res--;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+        cin>>a[i];
+    int m,x,y;
+    cin>>m;
+    vector<pair<pair<int,int>,int>>v(m+1);
+    for(int i=1;i<=m;i++){
+        cin>>v[i].pf.pf>>v[i].pf.ps;
+        v[i].ps = i;
+    }
+    sort(v.begin(),v.end());
+    int ml=1,mr=1;
+    for(int i=1;i<=m;i++)
+    {
+        int ql = v[i].pf.pf,qr = v[i].pf.ps,idx = v[i].ps;
+        while(ml<ql){
+            remove(ml);
+            ml++;
+        }
+        while(ml>ql){
+            add(ml-1);
+            ml--;
+        }
+        while(mr<=qr){
+            add(mr);
+            mr++;
+        }
+        while(mr>qr+1){
+            remove(qr-1);
+            mr--;
+        }
+        ans[idx] = res;
+    }
+    for(int i=1;i<=m;i++)
+        cout<<ans[i]<<endl;
+}
+#include<bits/stdc++.h>
+#define ll long long int
+#define mod 1000000007
+#define pb push_back
+#define mp make_pair
+#define endl '\n'
+#define N 100005
+#define pf first
+#define ps second
+using namespace std;
+int a[N],ans[N],res,cnt[N];
+void add(int pos)
+{
+    cnt[a[pos]]++;
+    if(cnt[a[pos]]==1)
+        res++;
+}
+void remove(int pos)
+{
+    cnt[a[pos]]--;
+    if(cnt[a[pos]]==0)
+        res--;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+        cin>>a[i];
+    int m,x,y;
+    cin>>m;
+    vector<pair<pair<int,int>,int>>v(m+1);
+    for(int i=1;i<=m;i++){
+        cin>>v[i].pf.pf>>v[i].pf.ps;
+        v[i].ps = i;
+    }
+    sort(v.begin(),v.end());
+    int ml=1,mr=1;
+    for(int i=1;i<=m;i++)
+    {
+        int ql = v[i].pf.pf,qr = v[i].pf.ps,idx = v[i].ps;
+        while(ml<ql){
+            remove(ml);
+            ml++;
+        }
+        while(ml>ql){
+            add(ml-1);
+            ml--;
+        }
+        while(mr<=qr){
+            add(mr);
+            mr++;
+        }
+        while(mr>qr+1){
+            remove(qr-1);
+            mr--;
+        }
+        ans[idx] = res;
+    }
+    for(int i=1;i<=m;i++)
+        cout<<ans[i]<<endl;
+}

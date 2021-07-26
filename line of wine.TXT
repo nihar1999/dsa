@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define mod 1000000007
+using namespace std;
+int a[1000],n;
+int greedy = 0;
+int ans (int i,int j)
+{
+    if(i>j) return 0;
+    if(i==j) return a[i];
+    if(j==i-1) return max(a[i],a[j]);
+    return max(a[i]+min(ans(i+2,j),ans(i+1,j-1)),a[j]+min(ans(i,j-2),ans(i+1,j-1)));
+}
+int ans_g(int i,int j)
+{
+    if(i>=n || j<0) return 0;
+    if(i>j) return 0;
+    if(i==j) return a[i];
+    if(j==i-1) return max(a[i],a[j]);
+    return max(a[i]+((a[i+1]>=a[j])? ans_g(i+2,j):ans_g(i+1,j-1)),a[j]+((a[i]>=a[j-1]) ? ans_g(i+1,j-1): ans_g(i,j-2)));
+}
+int ans_dp()
+{
+    int i=0,j=n-1;
+    int dp[i][j]={0};
+    for(g=0,x,y,z;g<n;g++) //x=(i+2,j),y=(i+1,j-1),z=(i,j-1)
+    {
+        for(int i=0,j=g;j<g;j++,i++)
+        {
+            x = (i+2<=j) ? ((dp[i+2][j] ? 
+        }
+    }
+}
+int ans_dp (int i,int j)
+{
+    int dp[n][n];
+    int x,y,z;
+
+    for(int g=0;g<n;g++)//i represents gap between dp states
+    {
+        for(int i=0,j=g;j<n;i++,j++)
+        {
+            x= ((i+2)<=j) ? dp[i + 2][j]:0;
+            y= ((i+1)<=(j-1)) ? dp[i+1][j-1]:0;
+            z= (i<=(j-2)) ? dp[i][j - 2]:0;
+
+            dp[i][j]=max(a[i]+min(x,y),a[j]+min(y,z));
+        }
+    }
+    return dp[0][n-1];
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--){
+    //int n;
+    //int a[n];
+    cin>>n;
+    int sum=0;
+    for(int i=0;i<n;i++)
+        cin>>a[i],sum+=a[i];
+    cout<<2*ans_g(0,n-1)-sum<<endl;
+    }
+}

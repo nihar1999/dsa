@@ -1,0 +1,20 @@
+ll power (ll a,ll b,ll m) {
+    a %= m;
+    ll res = 1;
+    while (b > 0) {
+        if (b & 1)
+            res = res * a % m;
+        a = a * a % m;
+        b >>= 1;
+    }
+    return res;
+}
+int ncr (int n,int r)
+{
+    if(r==0 || n==r)
+        return 1;
+    fact[0]=1;
+    for(int i=1;i<=(int)1e6;i++)
+        fact[i]=(fact[i-1]*i) % mod;
+    return ( (fact[n]*power(fact[n-r],mod-2,mod)%mod)*power(fact[r],mod-2,mod)%mod) ;
+}

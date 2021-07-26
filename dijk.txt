@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+const int INF = 1000000000;
+using namespace std;
+#define pii pair<int,int>
+vector<pair<int,int> >adj[100005];
+
+void dijk (int s,int n,vector<int>& d)
+{
+    d.assign(n+1,INF);
+    d[s]=0;
+    priority_queue<pii,vector<pii>,greater<pii>>q;
+    q.push({0,s});
+    while(!q.empty())
+    {
+        int v = q.top().second;
+        int d_v = q.top().first;
+        q.pop();
+        if(d_v!=d[v]) or (d_v > d[v]) 
+            continue;
+        for(auto edge : adj[v])
+        {
+            int to = edge.first;
+            int len = edge.second;
+            if(d[v]+len<d[to])
+            {
+                d[to] = d[v]+len;
+                q.push({d[to],to});
+            }
+        }
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--)
+    {
+        int n,m,s,t;
+        cin>>n>>m>>s>>t;
+        for(int i=0;i<m;i++)
+        {
+            int x,y,z;
+            cin>>x>>y>>z;
+            adj[y].push_back(make_pair(x,z));
+            adj[x].push_back(make_pair(y,z));
+        }
+        vector<int>d(n+1);
+        dijk(s,n,d);
+        if(d[t]==INF) cout<<"NONE"<<endl;
+        else cout<<d[t]<<endl;
+        for(int i=0;i<=n;i++)
+            adj[i].clear();
+    }
+}

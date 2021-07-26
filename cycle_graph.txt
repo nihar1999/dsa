@@ -1,0 +1,19 @@
+cycle in undirected graph:-
+back edge :- if there exist a node that is ancestor but not parent of a node;
+
+//return true if cycle else false
+bool dfs (int s,int parent)
+{
+    vis[s]=1;
+    for(int i=0;i<adj[s].size();i++)
+    {
+        if(vis[adj[s][i]] == 0)
+        {
+            if(dfs(adj[s][i],s) == true)
+                return true;
+        }
+        else if (adj[s][i]!=parent)
+            return true;
+    }
+    return false;
+}

@@ -1,0 +1,41 @@
+Dp with bitmasking :- 
+
+
+sample code //https://leetcode.com/problems/minimum-xor-sum-of-two-arrays/
+
+
+class Solution {
+public:
+    int dp[15][1<<15];
+    int n;
+    int rec (int i , int mask, vector<int>& nums1, vector<int>& nums2)
+    {
+        if(i==n)
+            return 0;
+        
+        if(dp[i][mask]!=-1)
+            return dp[i][mask];
+        
+        
+        int answer = INT_MAX;
+        
+        for(int j=0;j<n;j++)
+        {
+            if(mask & (1<<j)){
+                answer = min(answer , ( nums1[i] ^ nums2[j] ) + rec(i+1 , mask ^ (1<<j) ,nums1 , nums2));
+            }
+        }
+        
+        return dp[i][mask] = answer;
+    }
+    int minimumXORSum(vector<int>& nums1, vector<int>& nums2) {
+        int ans = 0;
+        n = nums2.size();
+        for(int i=0;i<=n;i++)
+            for(int j=0;j<(1<<15);j++)
+                dp[i][j] = -1;
+                
+        return rec(0,(1<<n) - 1 , nums1 , nums2);
+        
+    }
+};

@@ -1,0 +1,54 @@
+//if just want size of arrays of diff. colors,then we can just increase the size of two variables 
+inside dfs function .
+
+#include<bits/stdc++.h>
+#define ll long long int
+#define mod 1000000007
+#define pb push_back
+#define mp make_pair
+using namespace std;
+int vis[200005];
+bool col[200005];
+vector<int>adj[200005];
+void dfs(int s,bool col[],bool var)
+{
+    vis[s]=1;
+    col[s]=!var;
+    for(int i=0;i<adj[s].size();i++)
+    {
+        if(vis[adj[s][i]]==0)
+            dfs(adj[s][i],col,!var);
+	//This is conditin to check if bipartite graph coloring is possible or not
+	  hence if flag is on , given graph is not bipartite.
+	else if(col[s]==col[adj[s][i]])
+            f = 1;
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int t=1;
+    //cin>>t;
+    while(t--){
+    int n,m;
+    cin>>n;
+    m=n-1;
+    for(int i=0,x,y;i<m;i++)
+    {
+        cin>>x>>y;
+        adj[x].pb(y);
+        adj[y].pb(x);
+    }
+    dfs(1,col,false);
+    vector<int>a,b;
+    for(int i=1;i<=n;i++)
+    {
+        if(col[i]==true) a.pb(i);
+        else b.pb(i);
+    }
+    ll l1=a.size(),l2=b.size();
+    ll ans = l1*l2 - (n-1);
+    cout<<ans<<endl;
+}
+}

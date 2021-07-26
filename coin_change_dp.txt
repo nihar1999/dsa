@@ -1,0 +1,116 @@
+//coin change problem 
+#include<bits/stdc++.h>
+#define ll long long int
+#define mod 1000000007
+#define pb push_back
+#define mp make_pair
+#define N 105
+#define endl '\n'
+using namespace std;
+int a[N],n,m;
+int ans (int sum,int i)
+{
+    if(sum==0)
+        return 1;
+    if(sum<0||i>=m)
+    return 0;
+
+    return ans(sum-a[i],i)+ans(sum,i+1);
+}
+int ans_dp()
+{
+    int dp[n+1][m];
+    for(int i=0;i<m;i++)
+        dp[0][i]=1;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            //include a[j]
+            int x = (i-a[j]>=0) ? dp[i-a[j]][j] : 0;
+            //excude a[j]
+            int y = (j-1>=0) ?  dp[i][j-1] : 0;
+            dp[i][j] = x+y;
+        }
+    }
+    return dp[n][m-1];
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    //int n,m;
+    cin>>n>>m;
+    for(int i=0;i<m;i++)
+        cin>>a[i];
+    cout<<ans_dp()<<endl;
+}
+
+#include<bits/stdc++.h>
+#define ll long long int
+#define mod 1000000007
+#define pb push_back
+#define mp make_pair
+#define N 1000005
+//#define endl '\n'
+using namespace std;
+int a[N],n,m,dp[N][60];
+int ans (int sum,int i,int c)
+{
+    if(sum==0)
+        return c;
+    if(sum<0 || i>=m)
+        return INT_MAX;
+    else
+        return min(ans(sum-a[i],i,c+1),ans(sum,i+1,c));
+}
+int ans_dp(int sum,in ti,int n)
+{
+    int 
+}
+int ans_dp()
+{
+    int dp[n+1][m];
+    for(int i=0;i<m;i++)
+        dp[0][i]=1;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            //include a[j]
+            int x = (i-a[j]>=0) ? dp[i-a[j]][j] : 0;
+            //excude a[j]
+            int y = (j-1>=0) ?  dp[i][j-1] : 0;
+            dp[i][j] = x+y;
+        }
+    }
+    return dp[n][m-1];
+}
+//ans(n,0,0);
+int ans_dp(int sum,int i,int c)
+{
+    if(sum==0)
+    return c;
+    if(i>=m || sum<0)
+    return INT_MAX;
+
+    return min(ans(sum-a[i],i,c+1),ans(sum,i+1,c));
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    //int n,m;
+    cin>>n;
+    int i=0,j=0,maxx=0;
+    a[0]=0;
+    while(maxx<=1e6){
+        a[j++] = a[i]*10;
+        maxx = max(maxx,a[j-1]);
+        a[j++] = a[i]*10+1;
+        maxx = max(maxx,a[j-1]);
+        i++;
+    }
+    m = j;
+    cout<<ans_dp(n,1,0)<<endl;
+}

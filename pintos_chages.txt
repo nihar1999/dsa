@@ -1,0 +1,62 @@
+void old_timer_sleep(int 64_t ticks)
+{
+    int 64_t start = timer_ticks();
+    while(timer_elapsed(start)<ticks)
+        thread_yield();
+}
+
+void new_timer_sleep(int 64_t ticks)
+{
+    int 64_t start = timer_ticks();
+    
+    timer_wait(start+ticks);
+}
+
+To Do
+1.implement timer_wait()
+2.store start+ticks
+3.implement a fuction timer_wakeup() {in devices/timer.c}
+
+
+timer_wait_list() like ready_list.
+
+void list_insert_sorted(struct thread * a)
+{
+	for(a=list	
+}	
+//change the node structure to save a start+ticks in node
+void list_insert_sorted (int_64 time_t,struct list *list)
+{
+	struct name 	
+	struct list_elem *a;
+        struct list_elem *temp_node; //= (struct list)malloc(sizeof(struct list));
+        temp_node->timer = time_t;
+        temp_node->head=NULL;
+	temp_node->tail=NULL;
+	a =  list_begin(list);
+        for(a=list_begin(list);a!=list_end(list);a=list_next(a))
+        {
+		if(a->timer<=time_t && a->next->timer > time_t)
+                { 
+				
+ 		}
+	
+}
+1->5->7
+
+//list element
+struct list_elem
+{
+	struct list_elem *prev;
+        struct list_elem *next;
+	
+}
+//list
+struct list
+{
+	struct list_elem head;
+        struct list_elem tail;
+}
+
+
+struct list_elem * list_begin(struct list *list)

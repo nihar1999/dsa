@@ -1,0 +1,64 @@
+BIT MANIPULATION:-
+ 
+let n = 22 
+   binary : 00010110
+
+1]left shift : n = n<<i (i=number of times operation applied) 
+  n=n<<i == n=n*(2^i)    
+  operation same as multiplying by 2^i
+
+2]right shift: n = n>>i(i=number of times operation applied)
+  n=n>>i == n=n/(2^i)
+  operation same as dividing  by 2^i
+ 
+3]ith set bit: int f=1
+  res = n & (f<<i) (i=index of ith bit)
+
+4]count number of set bits:
+  count=0;
+  while(n>0){
+     count++;
+     n=n & (n-1);
+  }
+  also find by right shift
+
+
+XOR special cases and property :-
+
+1] if a is 2^x-1,then 
+   a & b = b
+   a ^ b = a-b
+
+
+
+
+
+
+
+
+
+
+
+BIT MASKING:-
+
+void subsetSums(int arr[], int n) 
+{ 
+    // There are totoal 2^n subsets 
+    long long total = 1<<n; 
+  
+    // Consider all combinations from 0 to 2^n - 1 
+    for (long long i=0; i<total; i++) 
+    { 
+        long long sum = 0; 
+  
+        // Consider binary reprsentation of 
+        // current i to decide which elements 
+        // to pick. 
+        for (int j=0; j<n; j++) 
+            if (i & (1<<j)) 
+                sum += arr[j]; 
+  
+        // Print sum of picked elements. 
+        cout << sum << " "; 
+    } 
+} 

@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define mod 1000000007
+#define pb push_back
+#define mp make_pair
+#define N 100005
+int a[N],bit[N],n;
+using namespace std;
+void update (int idx,int val)
+{
+    for(;idx<=n;idx+= idx&-idx)
+        bit[idx]+=val;
+    /*or*/
+    while(idx<=n){
+        bit[idx]+=val;
+        idx+=(idx&-idx);
+    }
+}
+int sum (int idx)
+{
+    int ans = 0;
+    while(idx>0)
+    {
+        ans+=bit[idx];
+        idx-=(idx & -idx);
+    }
+    return ans;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int t=1;
+    //cin>>t;
+    while(t--)
+    {
+        int q;
+        cin>>n>>q;
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+            update(i+1,a[i]);
+        }
+        
+        for(int i=0,l,val,r;i<q;i++)
+        {
+            cin>>l>>r>>val;
+            cout<<ans(r,k)-ans(l-1,k)<<endl;
+        }
+    }
+}
